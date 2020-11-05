@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+
+{% for article in articles %}
+    <h2> {{ article.title }}</h2>
+    <p>{{ article.content|raw }}</p>
+    <a href="{{ path('article', {'id' : article.id}) }}"> Lire</a>
+{% endfor %}
+{{ knp_pagination_render(articles) }}
+{% endblock %}
