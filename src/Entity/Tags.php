@@ -6,6 +6,7 @@ use App\Repository\TagsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TagsRepository::class)
@@ -24,8 +25,9 @@ class Tags
      */
     private $tag;
 
-    /**
-     * @ORM\Column(type="string", length=60)
+      /**
+     * @Gedmo\Slug(fields={"tag"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -39,6 +41,10 @@ class Tags
         $this->articles = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->tag;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -59,13 +65,6 @@ class Tags
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     /**

@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
-{% block title %} {{ article.title }}{% endblock %}
+{# {% block title %} {{ article.title }}{% endblock %} #}
 {% block body %}
-<h1>{{ article.title }}</h1>
+{# <h1>{{ article.title }}</h1>
 <p> {{ article.content|raw }}</p>
 <p> {{ article.createdAt|date }} </p>
 
 <p>Catégories : </p>
 {% for categorie in article.categories %}
-    {{categorie.name}}
-{% endfor %}
+    {{categorie.namephp }}
+{% endfor %} #}
 {% endblock %}
