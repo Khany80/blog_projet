@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\Commentaires;
+use App\Form\CommentaireFormType;
 use App\Repository\ArticlesRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,10 +34,33 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/article-{id}", name="article")
      */
-    public function article($id)
+    public function article($id, Request $request)
     {
        $article = $this->getDoctrine()->getRepository(Articles::class)->findOneBy(['id' => $id]);
+
+       if (!$article) {
+           throw $this->createNotFoundException("L'article n'existe pas");
+       }
         
-       return $this->render('articles/article.html.twig', compact('article'));
+       $comment = new Commentaires();
+
+       $form = $this->createForm(CommentaireFormType::class, $comment);
+
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid()) {
+           $comment->setArticles($article);
+           $comment->setCreatedAt(new \DateTime('now'));
+
+           $doctrine = $this->getDoctrine()->getManager();
+           $doctrine->persist($comment);
+           $doctrine->flush();
+       }
+
+       return $this->render('articles/article.html.twig', [
+           'article' => $article,
+           'commentForm' =>$form->createView(),
+           
+           ]);
     }
 }
