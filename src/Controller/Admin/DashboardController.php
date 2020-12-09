@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Articles;
 use App\Entity\Categories;
+use App\Entity\Commentaires;
 use App\Entity\Tags;
 use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -32,6 +33,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categories', 'fa fa-tags', Categories::class);
         yield MenuItem::linkToCrud('Articles', 'fa fa-file-text', Articles::class);
         yield MenuItem::linkToCrud('Tags', 'fa fa-file-text', Tags::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fa fa-file-text', Commentaires::class);
         yield MenuItem::section('Paramètres');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', Users::class);
     }
