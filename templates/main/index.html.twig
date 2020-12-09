@@ -1,32 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}Blog
+{% endblock %}
 
 {% block body %}
-<h1>Mon blog</h1>
-<p>Page d'accueil</p>
+	<h1>Mon blog</h1>
+	<p>Page d'accueil</p>
 
-<div>
-    <h2>Preambule</h2>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris nisi, lobortis non luctus in, efficitur ut augue. In hac habitasse platea dictumst. Maecenas sed auctor sem, quis imperdiet lectus. Nullam orci magna, interdum eget viverra eget, suscipit vitae arcu. Praesent in ex egestas, volutpat nunc ut, egestas ligula. Vestibulum non semper diam, id vulputate nibh. Pellentesque porta, felis id gravida egestas, arcu sem fringilla lorem, vestibulum bibendum leo sem nec diam. Nunc mattis, erat ut varius aliquet, justo ex hendrerit odio, at bibendum turpis tortor at sapien. Morbi iaculis nulla quis velit lobortis fermentum. Curabitur dapibus semper felis, in finibus sapien imperdiet vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris finibus lacus eget mattis placerat. Ut vitae tristique sem. Donec blandit arcu ac nulla congue dapibus.<br>
-Curabitur vitae est at nisl efficitur convallis nec at metus. Sed neque dolor, mattis sit amet augue eu, vulputate accumsan eros. Suspendisse ac suscipit ex, non tempus eros. Sed at ligula commodo, dignissim massa vitae, fermentum velit. Nunc nec porttitor lectus. Nulla rhoncus accumsan mollis. Nullam tempus blandit egestas. Donec malesuada ligula velit, quis aliquam arcu sodales eu. Etiam maximus est ante, at tristique est lobortis sit amet. In felis ex, dictum nec varius vitae, dictum non massa. <br>
-Fusce dignissim turpis elit, a feugiat lacus rhoncus id. Aliquam gravida eleifend magna ac auctor. Aliquam finibus posuere diam, vel imperdiet mi sodales vel. Suspendisse viverra vulputate placerat. Aenean lobortis maximus libero, eget ornare nisi interdum quis. Nullam a tortor non erat tincidunt congue. Pellentesque efficitur est purus, at aliquet elit laoreet id. Sed sed ligula at massa iaculis laoreet. In cursus tempus massa, sed elementum tellus finibus non. Ut dolor elit, auctor non viverra non, accumsan eu augue.<br>
-Donec imperdiet sit amet justo in rutrum. Ut dictum eros vel turpis egestas, quis efficitur neque ornare. Nullam sed ante fringilla, condimentum orci et, efficitur est. Vivamus at sapien id nisl vestibulum volutpat. Aliquam erat volutpat. Duis condimentum lobortis ultricies. Proin facilisis metus nec neque tincidunt, quis ultricies risus auctor. Donec sagittis diam sed diam viverra, a elementum ex placerat. Pellentesque quis eros non justo volutpat venenatis.
-    </p>
-</div>
-<div>
-    <h4>{{ showLasted.title }}</h4>
-    <p>
-    {{ showLasted.content|striptags|u.truncate(2) }}
-    </p>
-    <a href="{{ path('article', {'id' : showLasted.id}) }}"> Lire la suite...</a>
-    <h4>{{ showRandom.title }}</h4>
-    <p>
-    {{ showRandom.content|striptags|u.truncate(2) }}
-    </p>
-    <a href="{{ path('article', {'id' : showRandom.id}) }}"> Lire la suite...</a>
-</div>
+	<div>
+		<h2>Preambule</h2>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris nisi, lobortis non luctus in, efficitur ut augue. In hac habitasse platea dictumst. Maecenas sed auctor sem, quis imperdiet lectus. Nullam orci magna, interdum eget viverra eget, suscipit vitae arcu. Praesent in ex egestas, volutpat nunc ut, egestas ligula. Vestibulum non semper diam, id vulputate nibh. Pellentesque porta, felis id gravida egestas, arcu sem fringilla lorem, vestibulum bibendum leo sem nec diam. Nunc mattis, erat ut varius aliquet, justo ex hendrerit odio, at bibendum turpis tortor at sapien. Morbi iaculis nulla quis velit lobortis fermentum. Curabitur dapibus semper felis, in finibus sapien imperdiet vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris finibus lacus eget mattis placerat. Ut vitae tristique sem. Donec blandit arcu ac nulla congue dapibus.<br>
+			Curabitur vitae est at nisl efficitur convallis nec at metus. Sed neque dolor, mattis sit amet augue eu, vulputate accumsan eros. Suspendisse ac suscipit ex, non tempus eros. Sed at ligula commodo, dignissim massa vitae, fermentum velit. Nunc nec porttitor lectus. Nulla rhoncus accumsan mollis. Nullam tempus blandit egestas. Donec malesuada ligula velit, quis aliquam arcu sodales eu. Etiam maximus est ante, at tristique est lobortis sit amet. In felis ex, dictum nec varius vitae, dictum non massa.
+			<br>
+			Fusce dignissim turpis elit, a feugiat lacus rhoncus id. Aliquam gravida eleifend magna ac auctor. Aliquam finibus posuere diam, vel imperdiet mi sodales vel. Suspendisse viverra vulputate placerat. Aenean lobortis maximus libero, eget ornare nisi interdum quis. Nullam a tortor non erat tincidunt congue. Pellentesque efficitur est purus, at aliquet elit laoreet id. Sed sed ligula at massa iaculis laoreet. In cursus tempus massa, sed elementum tellus finibus non. Ut dolor elit, auctor non viverra non, accumsan eu augue.<br>
+			Donec imperdiet sit amet justo in rutrum. Ut dictum eros vel turpis egestas, quis efficitur neque ornare. Nullam sed ante fringilla, condimentum orci et, efficitur est. Vivamus at sapien id nisl vestibulum volutpat. Aliquam erat volutpat. Duis condimentum lobortis ultricies. Proin facilisis metus nec neque tincidunt, quis ultricies risus auctor. Donec sagittis diam sed diam viverra, a elementum ex placerat. Pellentesque quis eros non justo volutpat venenatis.
+		</p>
+	</div>
+	<div>
+		<h4>{{ showLasted.title }}</h4>
+		<p>
+			{{ showLasted.content|striptags|u.truncate(2) }}
+		</p>
+		<a href="{{ path('article', {'id' : showLasted.id}) }}">
+			Lire la suite...</a>
+		<h4>{{ showRandom.title }}</h4>
+		<p>
+			{{ showRandom.content|striptags|u.truncate(2) }}
+		</p>
+		<a href="{{ path('article', {'id' : showRandom.id}) }}">
+			Lire la suite...</a>
+	</div>
 
 
 {% endblock %}

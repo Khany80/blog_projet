@@ -6,6 +6,7 @@ use App\Entity\Articles;
 use App\Entity\Commentaires;
 use App\Form\CommentaireFormType;
 use App\Repository\ArticlesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

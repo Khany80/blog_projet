@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-        {% endblock %}
-    </head>
-    <body>
-    {% include "main/header.html.twig" %}
-        {% block body %}
-
-        {% endblock %}
-          {% include "main/footer.html.twig" %}
-        {% block javascripts %}
-        
-        {% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+        {{ render(controller('App\\Controller\\MainController::nav')) }}
+		{% block body %}{% endblock %}
+		{% include "main/footer.html.twig" %}
+		{% block javascripts %}{% endblock %}
+	</body>
 </html>

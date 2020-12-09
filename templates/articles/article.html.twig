@@ -1,8 +1,7 @@
 {% extends "base.html.twig" %}
-{# {% block title %} {{ article.title }}{% endblock %} #}
 {% block body %}
 	<h1>{{ article.title }}</h1>
-    <img src="{{ asset('upload/images/' ~ article.images)| imagine_filter('square') }}" alt="{{ article.slug }}">
+	<img src="{{ asset('upload/images/' ~ article.images)| imagine_filter('square') }}" alt="{{ article.slug }}">
 	<p>
 		{{ article.content|raw }}</p>
 	<p>
@@ -14,18 +13,34 @@
 	{% for categorie in article.categories %}
 		{{categorie.name }}
 	{% endfor %}
+
+	<p>Tags:
+	</p>
+	{% for tag in article.tags %}
+		{{tag.tag }}
+	{% endfor %}
+
 	<h2>Commentaires ({{ article.commentaires|length }})</h2>
 	{% for commentaire in article.commentaires %}
 		<p>Publié par :
 			{{ commentaire.pseudo }}</p>
+		<p>
+			Le
+			{{ commentaire.createdAt|date("d/m/Y \à H:i:s") }}</p>
 		<div>{{ commentaire.content }}</div>
 	{% else %}
 		<p>Il n'y a pas de commentaire</p>
 	{% endfor %}
 
-    <h2>Ajout de commentaire</h2>
-    {{ form(commentForm) }}
+	<h2>Ajout de commentaire</h2>
+	{# {{ form(commentForm) }} #}
+
+	{{ form_start(commentForm) }}
+	{{ form_row(commentForm.email, {'label' :'Email : '}) }}
+	{{ form_row(commentForm.pseudo, {'label' :'Pseudo :'}) }}
+	{{ form_row(commentForm.content, {'label' :'Votre message : '}) }}
+
+	{{ form_end(commentForm)}}
 
 
 {% endblock %}
-
