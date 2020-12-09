@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Articles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+//use DoctrineExtensions\Query\Mysql\Rand;
 
 /**
  * @method Articles|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,25 @@ class ArticlesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function lastedArticle()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.created_at', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()[0];
+    }
+
+    public function randomArticle($ids)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        return $qb
+            ->where($qb->expr()->notIn('a.id', $ids))
+            ->orderBy('RAND()')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()[0];
+    }
 }
