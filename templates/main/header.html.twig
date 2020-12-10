@@ -1,4 +1,4 @@
 <h2>Header</h2>
 {% for category in categories %}
-    <p>{{ category.name }}</p>
+    <a href="{{ path('article-by-category', {'id' : category.id}) }}"> {{ category.name }}</a>
 {% endfor %}

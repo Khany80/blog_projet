@@ -6,11 +6,9 @@ use App\Entity\Articles;
 use App\Entity\Commentaires;
 use App\Form\CommentaireFormType;
 use App\Repository\ArticlesRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticlesController extends AbstractController
@@ -64,4 +62,21 @@ class ArticlesController extends AbstractController
            
            ]);
     }
+
+    /**
+     * @Route("article-by-category/{id}", name="article-by-category")
+     */
+    public function getIdCategory(PaginatorInterface $paginator, ArticlesRepository $repo, Request $request, $id)
+    {
+        $donnees = $repo->findByCategory($id);
+        $articles = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', 1),
+            4
+        );
+        return $this->render('articles/articleCategory.html.twig', [
+        'articles' => $articles
+        ]);
+    }
+
 }
