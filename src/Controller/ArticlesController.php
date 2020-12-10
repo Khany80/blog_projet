@@ -54,6 +54,8 @@ class ArticlesController extends AbstractController
            $doctrine = $this->getDoctrine()->getManager();
            $doctrine->persist($comment);
            $doctrine->flush();
+
+           return $this->redirectToRoute('article', ['id' => $article->getID()]);
        }
 
        return $this->render('articles/article.html.twig', [
