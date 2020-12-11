@@ -7,6 +7,24 @@
 	<h1>Mon blog</h1>
 	<p>Page d'accueil</p>
 
+	{% if articles is not null  %}
+		{% if articles|length > 0 %}
+			{% for article in articles %}
+				<h4>{{ article.title }}</h4>
+				<p>
+					{{ article.content|striptags|u.truncate(200) }}
+				</p>
+				<a href="{{ path('article', {'id' : article.id}) }}">
+					Lire la suite...</a>
+
+			{% endfor %}
+		{% else %}
+
+			<p>Désolée il n'y a pas de résultat pour votre recherche
+			</p>
+		{% endif %}
+	{% endif %}
+
 	<div>
 		<h2>Preambule</h2>
 		<p>
@@ -18,15 +36,17 @@
 		</p>
 	</div>
 	<div>
+
+
 		<h4>{{ showLasted.title }}</h4>
 		<p>
-			{{ showLasted.content|striptags|u.truncate(2) }}
+			{{ showLasted.content|striptags|u.truncate(200) }}
 		</p>
 		<a href="{{ path('article', {'id' : showLasted.id}) }}">
 			Lire la suite...</a>
 		<h4>{{ showRandom.title }}</h4>
 		<p>
-			{{ showRandom.content|striptags|u.truncate(2) }}
+			{{ showRandom.content|striptags|u.truncate(200) }}
 		</p>
 		<a href="{{ path('article', {'id' : showRandom.id}) }}">
 			Lire la suite...</a>

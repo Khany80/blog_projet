@@ -13,6 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=ArticlesRepository::class)
  * @Vich\Uploadable
+ * @ORM\Table(name="articles", indexes={@ORM\Index(columns={"title", "content"}, flags={"fulltext"})})
  */
 class Articles
 {
@@ -85,6 +86,11 @@ class Articles
      * @ORM\ManyToMany(targetEntity=Categories::class, inversedBy="articles")
      */
     private $categories;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
 
     public function __construct()
     {
@@ -254,6 +260,18 @@ class Articles
     public function removeCategory(Categories $category): self
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

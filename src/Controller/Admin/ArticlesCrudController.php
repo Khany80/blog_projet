@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
@@ -31,6 +32,7 @@ class ArticlesCrudController extends AbstractCrudController
             AssociationField::new('categories'),
             AssociationField::new('tags'),
             AssociationField::new('users')->hideOnForm(),
+            BooleanField::new('active')
         ];
         if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL ) {
             $fields[] = $image;
