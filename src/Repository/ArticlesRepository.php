@@ -90,6 +90,21 @@ class ArticlesRepository extends ServiceEntityRepository
         return $query;
     }
 
+    public function findByTag($category_id)
+    {
+        $query = $this->createQueryBuilder('a')
+                      ->select('a')
+                      ->leftJoin('a.tags', 'c')
+                      ->addSelect('c');
+        $query = $query->add('where', $query->expr()->in('c', ':c'))
+                      ->andWhere('a.active = 1')
+                      ->setParameter('c', $category_id)
+                      ->getQuery()
+                      ->getResult();
+          
+        return $query;
+    }
+
     /**
      * Recherche des articles en fonction du formulaire
      */

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\Categories;
 use App\Entity\Commentaires;
+use App\Entity\Tags;
 use App\Form\CommentaireFormType;
 use App\Repository\ArticlesRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -24,8 +26,12 @@ class ArticlesController extends AbstractController
             $request->query->getInt('page', 1),
             4
         );
+        $categories = $this->getDoctrine()->getRepository(Categories::class)->findAll();
+        $tags = $this->getDoctrine()->getRepository(Tags::class)->findAll();
         return $this->render('articles/index.html.twig', [
             'articles' => $articles,
+            'categories'=> $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -57,9 +63,14 @@ class ArticlesController extends AbstractController
            return $this->redirectToRoute('article', ['id' => $article->getID()]);
        }
 
+       $categories = $this->getDoctrine()->getRepository(Categories::class)->findAll();
+       $tags = $this->getDoctrine()->getRepository(Tags::class)->findAll();
+
        return $this->render('articles/article.html.twig', [
            'article' => $article,
            'commentForm' =>$form->createView(),
+           'categories'=> $categories,
+           'tags' => $tags,
            
            ]);
     }
@@ -77,6 +88,22 @@ class ArticlesController extends AbstractController
         );
         return $this->render('articles/articleCategory.html.twig', [
         'articles' => $articles
+        ]);
+    }
+
+        /**
+     * @Route("article-by-tag/{id}", name="article-by-tag")
+     */
+    public function getIdTag(PaginatorInterface $paginator, ArticlesRepository $repo, Request $request, $id)
+    {
+        $donnees = $repo->findByTag($id);
+        $articlesTag = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', 1),
+            4
+        );
+        return $this->render('articles/articleTag.html.twig', [
+        'articlesTag' => $articlesTag,
         ]);
     }
 

@@ -15,7 +15,7 @@ class SearchArticleType extends AbstractType
         $builder
             ->add('mots', SearchType::class, [
                 'label' => false, 
-                'attr' => ['placeholde' => 'Entrez un ou plusieurs mots-clés']
+                'attr' => ['placeholder' => 'Entrez un ou plusieurs mots-clés']
             ])
             ->add('Rechercher', SubmitType::class)
         ;
