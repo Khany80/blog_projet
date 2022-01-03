@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog
+{% endblock %}
+
+{% block body %}
+
+	<!-- Hero Section-->
+	{# <section style="background: url(img/hero.jpg); background-size: cover; background-position: center center" class="hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7">
+					<h1>Bootstrap 4 Blog - A free template by Bootstrap Temple</h1>
+					<a href="#" class="hero-link">Discover More</a>
+				</div>
+			</div>
+			<a href=".intro" class="continue link-scroll">
+				<i class="fa fa-long-arrow-down"></i>
+				Scroll Down</a>
+		</div>
+	</section> #}
+	<!-- Intro Section-->
+	<section class="intro">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<h2 class="h3">Some great intro here</h2>
+					<p class="text-big">Place a nice
+						<strong>introduction</strong>
+						here
+						<strong>to catch reader's attention</strong>. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="featured-posts no-padding-top">
+		<div
+			class="container">
+
+			<!-- Post recherche -->
+			{% if articles is not null  %}
+				{% if articles|length > 0 %}
+					{% for article in articles %}
+						<div class="row d-flex align-items-stretch">
+							<div class="image col-lg-5"><img src="img/featured-pic-2.jpeg" alt="..."></div>
+							<div class="text col-lg-7">
+								<div class="text-inner d-flex align-items-center">
+									<div class="content">
+										<header class="post-header">
+											<div class="category">
+												<a href="#">Business</a>
+												<a href="#">Technology</a>
+											</div>
+											<a href="post.html">
+												<h2 class="h4">{{ article.title }}</h2>
+											</a>
+										</header>
+										<p>{{ article.content|striptags|u.truncate(200) }}</p>
+										<footer class="post-footer d-flex align-items-center">
+											<a href="{{ path('article', {'id' : article.id}) }}" class="author d-flex align-items-center flex-wrap">
+												{# <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
+												<div class="title">
+													<span>John Doe</span>
+												</div> #}
+											Lire la suite ...</a>
+											<div class="date">
+												<i class="icon-clock"></i>
+												2 months ago</div>
+											<div class="comments">
+												<i class="icon-comment"></i>12</div>
+										</footer>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+
+					<p>Désolée il n'y a pas de résultat pour votre recherche
+					</p>
+				{% endif %}
+			{% endif %}
+			<!-- Post 1 -->
+			<div class="row d-flex align-items-stretch">
+				<div class="text col-lg-7">
+					<div class="text-inner d-flex align-items-center">
+						<div class="content">
+							<header class="post-header">
+								<div class="category">
+									<a href="#">Business</a>
+									<a href="#">Technology</a>
+								</div>
+								<a href="post.html">
+									<h2 class="h4">{{ showLasted.title }}</h2>
+								</a>
+							</header>
+							<p>{{ showLasted.content|striptags|u.truncate(200) }}</p>
+							<footer class="post-footer d-flex align-items-center">
+								<a href="{{ path('article', {'id' : showLasted.id}) }}" class="author d-flex align-items-center flex-wrap">
+									{# <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+									<div class="title">
+										<span>John Doe</span>
+									</div> #}
+								Lire la suite...</a>
+								<div class="date">
+									<i class="icon-clock"></i>
+									2 months ago</div>
+								<div class="comments">
+									<i class="icon-comment"></i>12</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+				<div class="image col-lg-5"><img src="img/featured-pic-1.jpeg" alt="..."></div>
+			</div>
+			<!-- Post   2     -->
+			<div class="row d-flex align-items-stretch">
+				<div class="image col-lg-5"><img src="img/featured-pic-2.jpeg" alt="..."></div>
+				<div class="text col-lg-7">
+					<div class="text-inner d-flex align-items-center">
+						<div class="content">
+							<header class="post-header">
+								<div class="category">
+									<a href="#">Business</a>
+									<a href="#">Technology</a>
+								</div>
+								<a href="post.html">
+									<h2 class="h4">{{ showRandom.title }}</h2>
+								</a>
+							</header>
+							<p>{{ showRandom.content|striptags|u.truncate(200) }}</p>
+							<footer class="post-footer d-flex align-items-center">
+								<a href="{{ path('article', {'id' : showRandom.id}) }}" class="author d-flex align-items-center flex-wrap">
+									{# <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
+									<div class="title">
+										<span>John Doe</span>
+									</div> #}
+								Lire la suite...</a>
+								<div class="date">
+									<i class="icon-clock"></i>
+									2 months ago</div>
+								<div class="comments">
+									<i class="icon-comment"></i>12</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	{# <h1>Mon blog</h1>
+		<p>Page d'accueil</p>
+	
+		{% if articles is not null  %}
+			{% if articles|length > 0 %}
+				{% for article in articles %}
+					<h4>{{ article.title }}</h4>
+					<p>
+						{{ article.content|striptags|u.truncate(200) }}
+					</p>
+					<a href="{{ path('article', {'id' : article.id}) }}">
+						Lire la suite...</a>
+	
+				{% endfor %}
+			{% else %}
+	
+				<p>Désolée il n'y a pas de résultat pour votre recherche
+				</p>
+			{% endif %}
+		{% endif %}
+	
+		<div>
+			<h2>Preambule</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris nisi, lobortis non luctus in, efficitur ut augue. In hac habitasse platea dictumst. Maecenas sed auctor sem, quis imperdiet lectus. Nullam orci magna, interdum eget viverra eget, suscipit vitae arcu. Praesent in ex egestas, volutpat nunc ut, egestas ligula. Vestibulum non semper diam, id vulputate nibh. Pellentesque porta, felis id gravida egestas, arcu sem fringilla lorem, vestibulum bibendum leo sem nec diam. Nunc mattis, erat ut varius aliquet, justo ex hendrerit odio, at bibendum turpis tortor at sapien. Morbi iaculis nulla quis velit lobortis fermentum. Curabitur dapibus semper felis, in finibus sapien imperdiet vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris finibus lacus eget mattis placerat. Ut vitae tristique sem. Donec blandit arcu ac nulla congue dapibus.<br>
+				Curabitur vitae est at nisl efficitur convallis nec at metus. Sed neque dolor, mattis sit amet augue eu, vulputate accumsan eros. Suspendisse ac suscipit ex, non tempus eros. Sed at ligula commodo, dignissim massa vitae, fermentum velit. Nunc nec porttitor lectus. Nulla rhoncus accumsan mollis. Nullam tempus blandit egestas. Donec malesuada ligula velit, quis aliquam arcu sodales eu. Etiam maximus est ante, at tristique est lobortis sit amet. In felis ex, dictum nec varius vitae, dictum non massa.
+				<br>
+				Fusce dignissim turpis elit, a feugiat lacus rhoncus id. Aliquam gravida eleifend magna ac auctor. Aliquam finibus posuere diam, vel imperdiet mi sodales vel. Suspendisse viverra vulputate placerat. Aenean lobortis maximus libero, eget ornare nisi interdum quis. Nullam a tortor non erat tincidunt congue. Pellentesque efficitur est purus, at aliquet elit laoreet id. Sed sed ligula at massa iaculis laoreet. In cursus tempus massa, sed elementum tellus finibus non. Ut dolor elit, auctor non viverra non, accumsan eu augue.<br>
+				Donec imperdiet sit amet justo in rutrum. Ut dictum eros vel turpis egestas, quis efficitur neque ornare. Nullam sed ante fringilla, condimentum orci et, efficitur est. Vivamus at sapien id nisl vestibulum volutpat. Aliquam erat volutpat. Duis condimentum lobortis ultricies. Proin facilisis metus nec neque tincidunt, quis ultricies risus auctor. Donec sagittis diam sed diam viverra, a elementum ex placerat. Pellentesque quis eros non justo volutpat venenatis.
+			</p>
+		</div>
+		<div>
+	
+	
+			<h4>{{ showLasted.title }}</h4>
+			<p>
+				{{ showLasted.content|striptags|u.truncate(200) }}
+			</p>
+			<a href="{{ path('article', {'id' : showLasted.id}) }}">
+				Lire la suite...</a>
+			<h4>{{ showRandom.title }}</h4>
+			<p>
+				{{ showRandom.content|striptags|u.truncate(200) }}
+			</p>
+			<a href="{{ path('article', {'id' : showRandom.id}) }}">
+				Lire la suite...</a>
+		</div> #}
+
+
+{% endblock %}
