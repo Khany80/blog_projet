@@ -18,7 +18,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/articles", name="articles")
      */
-    public function index(Request $request, PaginatorInterface $paginator)
+    public function index(Request $request, PaginatorInterface $paginator, ArticlesRepository $repo)
     {
         $donnees = $this->getDoctrine()->getRepository(Articles::class)->findBy(['active' => true], ['created_at' => 'desc']);
         $articles = $paginator->paginate(
@@ -28,10 +28,13 @@ class ArticlesController extends AbstractController
         );
         $categories = $this->getDoctrine()->getRepository(Categories::class)->findAll();
         $tags = $this->getDoctrine()->getRepository(Tags::class)->findAll();
+        $lastedArticles = $this->getDoctrine()->getRepository(Articles::class)->findBy([], ['created_at' => 'desc'], 3);
         return $this->render('articles/index.html.twig', [
             'articles' => $articles,
             'categories'=> $categories,
             'tags' => $tags,
+            'lasted' => $lastedArticles,
+
         ]);
     }
 
@@ -86,8 +89,14 @@ class ArticlesController extends AbstractController
             $request->query->getInt('page', 1),
             4
         );
+
+        $categories = $this->getDoctrine()->getRepository(Categories::class)->findAll();
+        $tags = $this->getDoctrine()->getRepository(Tags::class)->findAll();
+
         return $this->render('articles/articleCategory.html.twig', [
-        'articles' => $articles
+        'articles' => $articles,
+        'categories'=> $categories,
+        'tags' => $tags,
         ]);
     }
 

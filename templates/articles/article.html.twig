@@ -7,9 +7,9 @@
 		<main class="post blog-post col-lg-8">
 			<div class="container">
 				<div class="post-single">
-					<div class="post-thumbnail"><img
+					{# <div class="post-thumbnail"><img
 							src="{{ asset('upload/images/' ~ article.images)| imagine_filter('square') }}"
-							alt="{{ article.slug }}" alt="..." class="img-fluid"></div>
+							alt="{{ article.slug }}" alt="..." class="img-fluid"></div> #}
 					<div class="post-details">
 
 						<h1>{{ article.title }}</h1>
@@ -21,17 +21,18 @@
 								{% endfor %}
 							</div>
 						</div>
-						{# <div class="post-footer d-flex align-items-center flex-column flex-sm-row"> <a href="#"
+						<div class="post-footer d-flex align-items-center flex-column flex-sm-row"> 
+						{# <a href="#"
 								class="author d-flex align-items-center flex-wrap">
 								<div class="avatar"><img src="" alt="..." class="img-fluid"></div>
 								<div class="title"> <span>John Doe</span> </div>
-							</a>
+							</a> #}
 							<div class="d-flex align-items-center flex-wrap">
-								<div class="date"> <i class="icon-clock"></i> 2 months ago</div>
-								<div class="views"> <i class="icon-eye"></i> 500</div>
-								<div class="comments meta-last"> <i class="icon-comment"></i>12</div>
+								<div class="date"> <i class="icon-clock"></i> Posté le {{article.CreatedAt|date("d/m/Y")}}</div>
+								{# <div class="views"> <i class="icon-eye"></i> 500</div> #}
+								<div class="comments meta-last"> <i class="icon-comment"></i>{{ article.commentaires|length}}</div>
 							</div>
-						</div> #}
+						</div>
 						<div class="post-body">
 							<p class="lead">{{article.content|raw}}</p>
 						</div>
@@ -43,36 +44,36 @@
 							</a>
 						</div>
 						<div class="post-comments">
-							<header>
-								<h3 class="h6">Post Comments<span class="no-of-comments">{{ article.commentaires|length
-										}}</span>
-								</h3>
-							</header>
 							<div class="add-comment">
 								<header>
-									<h3 class="h6">Leave a reply</h3>
+									<h3 class="h6">Laisser un commentaire</h3>
 								</header>
 								<form action="#" class="commenting-form">
 									<div class="row">
 										<div class="form-group col-md-6">
-											<input type="text" name="username" id="username" placeholder="Name"
+											<input type="text" name="username" id="username" placeholder="Pseudo"
 												class="form-control">
 										</div>
 										<div class="form-group col-md-6">
 											<input type="email" name="username" id="useremail"
-												placeholder="Email Address (will not be published)"
+												placeholder="adresse mail (ne sera pas publié)"
 												class="form-control">
 										</div>
 										<div class="form-group col-md-12">
 											<textarea name="usercomment" id="usercomment"
-												placeholder="Type your comment" class="form-control"></textarea>
+												placeholder="Ecrivez votre commentaire" class="form-control"></textarea>
 										</div>
 										<div class="form-group col-md-12">
-											<button type="submit" class="btn btn-secondary">Submit Comment</button>
+											<button type="submit" class="btn btn-secondary">Envoyer</button>
 										</div>
 									</div>
 								</form>
 							</div>
+							<header>
+								<h3 class="h6">Commentaires<span class="no-of-comments">{{ article.commentaires|length
+										}}</span>
+								</h3>
+							</header>
 							{% for commentaire in article.commentaires %}
 							<div class="comment">
 								<div class="comment-header d-flex justify-content-between">
@@ -94,6 +95,7 @@
 								<p>Il n'y a pas de commentaire</p>
 							</div>
 							{% endfor %}
+							
 						</div>
 					</div>
 				</div>

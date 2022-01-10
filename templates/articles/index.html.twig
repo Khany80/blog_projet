@@ -18,13 +18,15 @@
 						{% for article in articles %}
 							<div class="post col-xl-6">
 								<div class="post-thumbnail">
-									<a href="post.html"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></a>
+									<a href="{{ path('article', {'id' : article.id}) }}"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></a>
 								</div>
 								<div class="post-details">
 									<div class="post-meta d-flex justify-content-between">
-										<div class="date meta-last">20 May | 2016</div>
+										<div class="date meta-last">{{article.CreatedAt|date("d/m/Y")}}</div>
 										<div class="category">
-											<a href="#">Business</a>
+											{% for categorie in article.categories %}
+												<a href="{{ path('article-by-category', {'id' : categorie.id}) }}">{{categorie.name}}</a>
+										{% endfor %}
 										</div>
 									</div>
 									<a href="{{ path('article', {'id' : article.id}) }}">
@@ -40,9 +42,9 @@
 										</a>
 										<div class="date">
 											<i class="icon-clock"></i>
-											2 months ago</div>
+											{{article.CreatedAt|ago }}</div>
 										<div class="comments meta-last">
-											<i class="icon-comment"></i>12</div>
+											<i class="icon-comment"></i>{{ article.commentaires|length}}</div>
 									</footer>
 								</div>
 							</div>
@@ -92,56 +94,31 @@
 						</form>
 					</div>
 					<!-- Widget [Latest Posts Widget]        -->
+						
 					<div class="widget latest-posts">
 						<header>
 							<h3 class="h6">Latest Posts</h3>
 						</header>
+				
+						{% for lastarticle in lasted %}
+						
 						<div class="blog-posts">
-							<a href="#">
+							<a href="{{ path('article', {'id' : lastarticle.id}) }}">
 								<div class="item d-flex align-items-center">
 									<div class="image"><img src="img/small-thumbnail-1.jpg" alt="..." class="img-fluid"></div>
 									<div class="title">
-										<strong>Alberto Savoia Can Teach You About</strong>
+										<strong>{{ lastarticle.title}}</strong>
 										<div class="d-flex align-items-center">
-											<div class="views">
+											{# <div class="views">
 												<i class="icon-eye"></i>
-												500</div>
+												500</div> #}
 											<div class="comments">
-												<i class="icon-comment"></i>12</div>
+												<i class="icon-comment"></i>{{ lastarticle.commentaires|length }}</div>
 										</div>
 									</div>
 								</div>
 							</a>
-							<a href="#">
-								<div class="item d-flex align-items-center">
-									<div class="image"><img src="img/small-thumbnail-2.jpg" alt="..." class="img-fluid"></div>
-									<div class="title">
-										<strong>Alberto Savoia Can Teach You About</strong>
-										<div class="d-flex align-items-center">
-											<div class="views">
-												<i class="icon-eye"></i>
-												500</div>
-											<div class="comments">
-												<i class="icon-comment"></i>12</div>
-										</div>
-									</div>
-								</div>
-							</a>
-							<a href="#">
-								<div class="item d-flex align-items-center">
-									<div class="image"><img src="img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
-									<div class="title">
-										<strong>Alberto Savoia Can Teach You About</strong>
-										<div class="d-flex align-items-center">
-											<div class="views">
-												<i class="icon-eye"></i>
-												500</div>
-											<div class="comments">
-												<i class="icon-comment"></i>12</div>
-										</div>
-									</div>
-								</div>
-							</a>
+							{% endfor %}
 						</div>
 					</div>
 					<!-- Widget [Categories Widget]-->

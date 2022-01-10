@@ -60,6 +60,16 @@ class ArticlesRepository extends ServiceEntityRepository
             ->getResult()[0];
     }
 
+    public function lastedArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.created_at', 'ASC')
+            ->where('a.active = 1')
+            //->setMaxResults(3)
+            ->getQuery()
+            ->getResult()[0];
+    }
+
 
     public function randomArticle($ids)
     {
@@ -80,21 +90,6 @@ class ArticlesRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a')
                       ->select('a')
                       ->leftJoin('a.categories', 'c')
-                      ->addSelect('c');
-        $query = $query->add('where', $query->expr()->in('c', ':c'))
-                      ->andWhere('a.active = 1')
-                      ->setParameter('c', $category_id)
-                      ->getQuery()
-                      ->getResult();
-          
-        return $query;
-    }
-
-    public function findByTag($category_id)
-    {
-        $query = $this->createQueryBuilder('a')
-                      ->select('a')
-                      ->leftJoin('a.tags', 'c')
                       ->addSelect('c');
         $query = $query->add('where', $query->expr()->in('c', ':c'))
                       ->andWhere('a.active = 1')
